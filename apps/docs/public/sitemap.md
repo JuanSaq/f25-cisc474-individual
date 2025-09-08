@@ -3,7 +3,7 @@
 Should appear as a graph on GitHub
 
 ```mermaid
-    graph td;
+    graph TD;
         Main-->Settings/Account
         Main-->Class
         Main-->Calender
