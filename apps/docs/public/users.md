@@ -29,6 +29,7 @@ Need/Should to Access
         - Announcements
         - Syllabus
         - Materials
+            - Annotation Mode
     - Assignments
         - Grading Tool
         - Feedback Tool
