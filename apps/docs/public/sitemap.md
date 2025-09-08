@@ -12,7 +12,7 @@ Should appear as a graph on GitHub
         Class-->Materials;
         Class-->Assignments;
         Class-->Grades;
-        Assignments-->Submission View;
-        Assignments-->Feedback View;
-        Assignments-->Grading View (Instructors);
+        Assignments-->SubmissionView;
+        Assignments-->FeedbackView;
+        Assignments-->GradingView;
 ```
