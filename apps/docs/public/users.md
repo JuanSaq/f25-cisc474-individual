@@ -15,7 +15,7 @@ Need/Should to Access
         - Feedback Tool
     - Materials
     - Grades
-- Calender/Task View
+- Calendar/Task View
 
 ## Instructors
 

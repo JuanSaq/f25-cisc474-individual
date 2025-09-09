@@ -7,7 +7,7 @@ Should appear as a graph on GitHub
         A(Login)-->B(Dashboard);
         B<-->C(Settings/Account);
         B-->D(Class);
-        B<-->E(Calender);
+        B<-->E(Calendar);
         D-->F(Announcments);
         D-->G(Syllabus);
         D-->H(Materials);
