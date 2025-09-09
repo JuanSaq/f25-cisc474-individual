@@ -45,3 +45,12 @@ Need/Should to Access
     - Create Users
         - Learners
         - Instructors
+
+
+# Unique Submission Feature
+
+A Submission a unique and "cool" feature
+
+Somes Ideas (for now)
+- Be able to accept markdown natively
+- Built-in split/combine PDFs (~~personally I wished canvas did this~~)
