@@ -25,24 +25,22 @@ Need/Should to Access
     - Pronouns
     - Light/Dark Mode?
 - Classes
-    - Upload Tool 
+    - Upload Tool  "As an instructor, I want to be able to easily upload to my classes"
         - Announcements
         - Syllabus
         - Materials
-            - Annotation Mode
     - Assignments
-        - Grading Tool
-        - Feedback Tool
+        - Grading Tool "As an instructor, I want to be able to easily grade assignments"
     - Grades
-        - Gradebook view
+        - Gradebook view "As an instructor, I want to be able to easily see all of my learners' grades"
 
 ## Administrator 
 
 Need/Should to Access
 - Environment Tools
-    - Create Classes
+    - Create Classes "As an administrator, I need to be able to create classes for other users"
         - Assign users to Classes
-    - Create Users
+    - Create Users "As an administrator, I need to be able to create users"
         - Learners
         - Instructors
 
