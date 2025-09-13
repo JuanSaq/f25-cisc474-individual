@@ -2,6 +2,8 @@ import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
 
+import Link from "next/link";
+
 type Props = Omit<ImageProps, "src"> & {
     srcLight: string;
     srcDark: string;
@@ -31,9 +33,9 @@ export default function Home() {
                     <li>Save and see your changes instantly.</li>
                 </ol>
 
-                <Button appName="web" className={styles.secondary}>
-                    Open alert
-                </Button>
+                <Link href={"/dashboard"} className={styles.secondary}>
+                    To Dashboard
+                </Link>
             </main>
             <footer className={styles.footer}>
                 <a
