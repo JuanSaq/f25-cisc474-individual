@@ -2,6 +2,7 @@ import Image, { type ImageProps } from "next/image";
 import { Button } from "@repo/ui/button";
 import styles from "./page.module.css";
 
+
 import Link from "next/link";
 
 type Props = Omit<ImageProps, "src"> & {
@@ -27,13 +28,12 @@ export default function Home() {
                 <h1>CISC474 Project Starter</h1>
                 <ol>
                     <li>
-                        Get started by editing{" "}
-                        <code>apps/web/app/page.tsx</code>
+                        To be replaced by a login screen.
                     </li>
-                    <li>Save and see your changes instantly.</li>
+                    <li>For now, navigate to Dashboard</li>
                 </ol>
 
-                <Link href={"/dashboard"} className={styles.secondary}>
+                <Link href={"/dashboard"} className={styles.secondary} style={{backgroundColor: "blue"}}>
                     To Dashboard
                 </Link>
             </main>

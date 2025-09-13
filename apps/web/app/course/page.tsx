@@ -1,14 +1,14 @@
 import Link from "next/link";
-
+import styles from "../page.module.css";
 
 export default function CoursePage() {
   return (
-        <main>
+        <main className={styles.main}>
             <h1>This is a course!</h1>
             <Link href={"/course/announcements"}>Announcements</Link>
-            <ol></ol>
+            <hr/>
             <Link href={"/course/assignments"}>Assignments</Link>
-            <ol></ol>
+            <hr/>
             <Link href={"/course/grades"}>Grades</Link>
         </main>
     )
