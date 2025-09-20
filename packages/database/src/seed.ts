@@ -3,6 +3,8 @@ import { faker } from "@faker-js/faker";
 
 const prisma = new PrismaClient();
 
+const pronounOptions = ["he/him", "she/her", "they/them"];
+
 async function main() {
   // Create some users with profiles
   const users = await Promise.all(
@@ -14,7 +16,7 @@ async function main() {
           profile: {
             create: {
               bio: faker.lorem.sentence(),
-              pronouns: faker.person.prefix(),
+              pronouns: faker.helpers.arrayElement(pronounOptions),
             },
           },
         },
