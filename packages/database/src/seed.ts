@@ -8,7 +8,7 @@ const pronounOptions = ["he/him", "she/her", "they/them"];
 async function main() {
   // Create some users with profiles
   const users = await Promise.all(
-    Array.from({ length: 5 }).map(async () => {
+    Array.from({ length: 7 }).map(async () => {
       const user = await prisma.user.create({
         data: {
           email: faker.internet.email(),
