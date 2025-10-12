@@ -7,8 +7,10 @@ export const Route = createFileRoute('/')({
 function RouteComponent() {
   return (
   <div>Hello "/"!
-    <li></li>
-    <Link to="/dashboard">To Dashboard</Link>
+    <li/>
+    <Link to="/dashboard">To Dashboard (loads courses from backend)</Link>
+    <li/>
+    <Link to="/course/$courseId/assignments" params={{courseId: "Test"}}>To Assignments List (loads assignments from backend)</Link>
   </div>
   )
 }
