@@ -6,17 +6,17 @@ export const Route = createFileRoute('/dashboard')({
 })
 
 
-// css seems to not be working the same as the old system, will come back later
+// temp ids for now, will map later
 function RouteComponent() {
   return (
   
     <main>
         <h1>Hello "/dashboard"!</h1>
         <div className="courseGrid">
-            <Link to="/" className="courseButton"> test</Link>
-            <div> test </div>
-            <div> test</div>
-            <div> test </div>
+            <Link to="/course/$courseId" params={{courseId: "1"}} className="courseButton"> test</Link>
+            <Link to="/course/$courseId" params={{courseId: "2"}} className="courseButton"> test</Link>
+            <Link to="/course/$courseId" params={{courseId: "3"}} className="courseButton"> test</Link>
+            <Link to="/course/$courseId" params={{courseId: "4"}} className="courseButton"> test</Link>
 
         </div>
     </main>
