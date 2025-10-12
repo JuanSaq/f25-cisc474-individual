@@ -9,38 +9,128 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as CourseIndexRouteImport } from './routes/course/index'
+import { Route as CourseCourseIdRouteImport } from './routes/course/$courseId'
+import { Route as CourseGradesIndexRouteImport } from './routes/course/grades/index'
+import { Route as CourseAssignmentsIndexRouteImport } from './routes/course/assignments/index'
+import { Route as CourseAnnouncementsIndexRouteImport } from './routes/course/announcements/index'
 
+const DashboardRoute = DashboardRouteImport.update({
+  id: '/dashboard',
+  path: '/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const CourseIndexRoute = CourseIndexRouteImport.update({
+  id: '/course/',
+  path: '/course/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourseCourseIdRoute = CourseCourseIdRouteImport.update({
+  id: '/course/$courseId',
+  path: '/course/$courseId',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourseGradesIndexRoute = CourseGradesIndexRouteImport.update({
+  id: '/course/grades/',
+  path: '/course/grades/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourseAssignmentsIndexRoute = CourseAssignmentsIndexRouteImport.update({
+  id: '/course/assignments/',
+  path: '/course/assignments/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourseAnnouncementsIndexRoute =
+  CourseAnnouncementsIndexRouteImport.update({
+    id: '/course/announcements/',
+    path: '/course/announcements/',
+    getParentRoute: () => rootRouteImport,
+  } as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
+  '/course': typeof CourseIndexRoute
+  '/course/announcements': typeof CourseAnnouncementsIndexRoute
+  '/course/assignments': typeof CourseAssignmentsIndexRoute
+  '/course/grades': typeof CourseGradesIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
+  '/course': typeof CourseIndexRoute
+  '/course/announcements': typeof CourseAnnouncementsIndexRoute
+  '/course/assignments': typeof CourseAssignmentsIndexRoute
+  '/course/grades': typeof CourseGradesIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/dashboard': typeof DashboardRoute
+  '/course/$courseId': typeof CourseCourseIdRoute
+  '/course/': typeof CourseIndexRoute
+  '/course/announcements/': typeof CourseAnnouncementsIndexRoute
+  '/course/assignments/': typeof CourseAssignmentsIndexRoute
+  '/course/grades/': typeof CourseGradesIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/dashboard'
+    | '/course/$courseId'
+    | '/course'
+    | '/course/announcements'
+    | '/course/assignments'
+    | '/course/grades'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/dashboard'
+    | '/course/$courseId'
+    | '/course'
+    | '/course/announcements'
+    | '/course/assignments'
+    | '/course/grades'
+  id:
+    | '__root__'
+    | '/'
+    | '/dashboard'
+    | '/course/$courseId'
+    | '/course/'
+    | '/course/announcements/'
+    | '/course/assignments/'
+    | '/course/grades/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  DashboardRoute: typeof DashboardRoute
+  CourseCourseIdRoute: typeof CourseCourseIdRoute
+  CourseIndexRoute: typeof CourseIndexRoute
+  CourseAnnouncementsIndexRoute: typeof CourseAnnouncementsIndexRoute
+  CourseAssignmentsIndexRoute: typeof CourseAssignmentsIndexRoute
+  CourseGradesIndexRoute: typeof CourseGradesIndexRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/dashboard': {
+      id: '/dashboard'
+      path: '/dashboard'
+      fullPath: '/dashboard'
+      preLoaderRoute: typeof DashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -48,11 +138,52 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/course/': {
+      id: '/course/'
+      path: '/course'
+      fullPath: '/course'
+      preLoaderRoute: typeof CourseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/course/$courseId': {
+      id: '/course/$courseId'
+      path: '/course/$courseId'
+      fullPath: '/course/$courseId'
+      preLoaderRoute: typeof CourseCourseIdRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/course/grades/': {
+      id: '/course/grades/'
+      path: '/course/grades'
+      fullPath: '/course/grades'
+      preLoaderRoute: typeof CourseGradesIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/course/assignments/': {
+      id: '/course/assignments/'
+      path: '/course/assignments'
+      fullPath: '/course/assignments'
+      preLoaderRoute: typeof CourseAssignmentsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/course/announcements/': {
+      id: '/course/announcements/'
+      path: '/course/announcements'
+      fullPath: '/course/announcements'
+      preLoaderRoute: typeof CourseAnnouncementsIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  DashboardRoute: DashboardRoute,
+  CourseCourseIdRoute: CourseCourseIdRoute,
+  CourseIndexRoute: CourseIndexRoute,
+  CourseAnnouncementsIndexRoute: CourseAnnouncementsIndexRoute,
+  CourseAssignmentsIndexRoute: CourseAssignmentsIndexRoute,
+  CourseGradesIndexRoute: CourseGradesIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
