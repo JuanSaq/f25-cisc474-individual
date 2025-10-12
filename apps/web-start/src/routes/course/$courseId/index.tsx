@@ -8,7 +8,7 @@ function RouteComponent() {
   const courseId = Route.useParams().courseId;
   return (
     <main>
-      <div>Hello "/course/$courseId"!</div>
+      <div>Hello "/course/{courseId}"!</div>
         <Link to="/course/$courseId/annoucements" params={{courseId: courseId }}>Announcements</Link>
         <hr/>
         <Link to="/course/$courseId/assignments" params={{courseId: courseId}}>Assignments</Link>

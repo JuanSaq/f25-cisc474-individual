@@ -5,5 +5,16 @@ export const Route = createFileRoute('/course/$courseId/grades')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/course/$courseId/grades"!</div>
+  return (
+        <main>
+            <h1>Grades</h1>
+            <h2>Assignment 1 (23/25)</h2>
+            <hr></hr>
+            <h2>Assignment 2 (24/30)</h2>
+            <hr></hr>
+            <h2>Assignment 3 (90/100)</h2>
+            <hr></hr>
+            <h2>Assignment 4 (29/30)</h2>
+        </main>
+    )
 }
