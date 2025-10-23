@@ -22,8 +22,8 @@ export const CourseCreateIn = z.object({
 export type CourseCreateIn = z.infer<typeof CourseCreateIn>;
 
 export const CourseUpdateIn = z.object({
-  name: z.string().min(1).optional(),
-  description: z.string().optional().nullable(),
+  id: z.uuid(),
+  title: z.string().min(1).optional(),
   ownerId: z.uuid().optional(),
 });
 export type CourseUpdateIn = z.infer<typeof CourseUpdateIn>;

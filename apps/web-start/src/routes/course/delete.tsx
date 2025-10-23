@@ -1,6 +1,6 @@
 import { CourseCreateIn, CourseOut, CourseRef } from '@repo/api/courses';
 import { createFileRoute } from '@tanstack/react-router'
-import { mutateBackend } from '../../integrations/fetcher';
+import { backendFetcher, mutateBackend } from '../../integrations/fetcher';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
@@ -9,6 +9,9 @@ export const Route = createFileRoute('/course/delete')({
 })
 
 function RouteComponent() {
+
+
+
    const [courseId, setCourseId] = useState('');
 
    const queryClient = useQueryClient();
