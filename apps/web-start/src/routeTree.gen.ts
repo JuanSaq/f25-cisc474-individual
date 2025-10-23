@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CourseIndexRouteImport } from './routes/course/index'
+import { Route as CourseDeleteRouteImport } from './routes/course/delete'
 import { Route as CourseCreateRouteImport } from './routes/course/create'
 import { Route as CourseCourseIdIndexRouteImport } from './routes/course/$courseId/index'
 import { Route as CourseCourseIdGradesRouteImport } from './routes/course/$courseId/grades'
@@ -31,6 +32,11 @@ const IndexRoute = IndexRouteImport.update({
 const CourseIndexRoute = CourseIndexRouteImport.update({
   id: '/course/',
   path: '/course/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CourseDeleteRoute = CourseDeleteRouteImport.update({
+  id: '/course/delete',
+  path: '/course/delete',
   getParentRoute: () => rootRouteImport,
 } as any)
 const CourseCreateRoute = CourseCreateRouteImport.update({
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/course/create': typeof CourseCreateRoute
+  '/course/delete': typeof CourseDeleteRoute
   '/course': typeof CourseIndexRoute
   '/course/$courseId/annoucements': typeof CourseCourseIdAnnoucementsRoute
   '/course/$courseId/assignments': typeof CourseCourseIdAssignmentsRoute
@@ -75,6 +82,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/course/create': typeof CourseCreateRoute
+  '/course/delete': typeof CourseDeleteRoute
   '/course': typeof CourseIndexRoute
   '/course/$courseId/annoucements': typeof CourseCourseIdAnnoucementsRoute
   '/course/$courseId/assignments': typeof CourseCourseIdAssignmentsRoute
@@ -86,6 +94,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
   '/course/create': typeof CourseCreateRoute
+  '/course/delete': typeof CourseDeleteRoute
   '/course/': typeof CourseIndexRoute
   '/course/$courseId/annoucements': typeof CourseCourseIdAnnoucementsRoute
   '/course/$courseId/assignments': typeof CourseCourseIdAssignmentsRoute
@@ -98,6 +107,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/course/create'
+    | '/course/delete'
     | '/course'
     | '/course/$courseId/annoucements'
     | '/course/$courseId/assignments'
@@ -108,6 +118,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/course/create'
+    | '/course/delete'
     | '/course'
     | '/course/$courseId/annoucements'
     | '/course/$courseId/assignments'
@@ -118,6 +129,7 @@ export interface FileRouteTypes {
     | '/'
     | '/dashboard'
     | '/course/create'
+    | '/course/delete'
     | '/course/'
     | '/course/$courseId/annoucements'
     | '/course/$courseId/assignments'
@@ -129,6 +141,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
   CourseCreateRoute: typeof CourseCreateRoute
+  CourseDeleteRoute: typeof CourseDeleteRoute
   CourseIndexRoute: typeof CourseIndexRoute
   CourseCourseIdAnnoucementsRoute: typeof CourseCourseIdAnnoucementsRoute
   CourseCourseIdAssignmentsRoute: typeof CourseCourseIdAssignmentsRoute
@@ -157,6 +170,13 @@ declare module '@tanstack/react-router' {
       path: '/course'
       fullPath: '/course'
       preLoaderRoute: typeof CourseIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/course/delete': {
+      id: '/course/delete'
+      path: '/course/delete'
+      fullPath: '/course/delete'
+      preLoaderRoute: typeof CourseDeleteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/course/create': {
@@ -201,6 +221,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
   CourseCreateRoute: CourseCreateRoute,
+  CourseDeleteRoute: CourseDeleteRoute,
   CourseIndexRoute: CourseIndexRoute,
   CourseCourseIdAnnoucementsRoute: CourseCourseIdAnnoucementsRoute,
   CourseCourseIdAssignmentsRoute: CourseCourseIdAssignmentsRoute,
