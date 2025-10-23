@@ -1,8 +1,8 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import "./dashboard.css"
 import { useQuery } from '@tanstack/react-query';
-import {Course} from '@repo/database'
 import { backendFetcher } from '../integrations/fetcher';
+import type { CourseOut } from '@repo/api/courses'
 
 export const Route = createFileRoute('/dashboard')({
   component: RouteComponent,
@@ -11,9 +11,9 @@ export const Route = createFileRoute('/dashboard')({
 
 // temp ids for now, will map later
 function RouteComponent() {
-  const { isPending, isError, data, error } = useQuery<Array<Course>>({
+  const { isPending, isError, data, error } = useQuery({
     queryKey: ['courses'],
-    queryFn: backendFetcher("/courses"),
+    queryFn: backendFetcher<Array<CourseOut>>("/courses"),
   })
 
   if (isPending) return <span>Is Loading...</span>;
