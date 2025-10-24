@@ -3,26 +3,29 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useState } from 'react';
 import { mutateBackend } from '../../integrations/fetcher';
 import { CourseOut, CourseUpdateIn } from '@repo/api/courses';
+import { useApiMutation, useCurrentUser } from '../../integrations/api';
 
 export const Route = createFileRoute('/course/edit')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  const [newTitle, setNewTitle] = useState('');
-  const [courseId, setCourseId] = useState('');
-   const [newOwnerId, setNewOwnerId] = useState('1e085d11-c1e8-4fb7-9968-b6bde5721609'); // will use first ownerId for now
+   const { data: currentUser } = useCurrentUser();
+   const [newTitle, setNewTitle] = useState('');
+   const [courseId, setCourseId] = useState('');
+   
 
    const queryClient = useQueryClient();
 
-   const mutation = useMutation({
-    mutationFn: (newCourse: CourseUpdateIn) => {
-      return mutateBackend<CourseOut>(`/courses/${newCourse.id}`, 'PATCH', newCourse);
-    },
-    onSuccess: (data: CourseOut) => {
-      queryClient.setQueryData(['courses', data.id], data)
-    },
-   })
+   const mutation = useApiMutation<CourseUpdateIn, CourseOut>({
+       endpoint: (variables) => ({
+         path: `/courses/${variables.id}`,
+         method: 'PATCH',
+       }),
+       invalidateKeys: [['courses']],
+    });
+
+   
 
   return (
     <div>
@@ -61,7 +64,7 @@ function RouteComponent() {
                 mutation.mutate({
                   id: courseId,
                   title: newTitle,
-                  ownerId: newOwnerId,
+                  ownerId: currentUser?.id || '',
                 });
               }}
             >
@@ -70,7 +73,7 @@ function RouteComponent() {
           </div>
           <hr></hr>
           <div>
-            <a href="/dashboard">Back to Courses</a>
+            <a href="/course">Back to Courses</a>
           </div>
         </>
       )}

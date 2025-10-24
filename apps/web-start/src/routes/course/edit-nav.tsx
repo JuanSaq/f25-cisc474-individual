@@ -15,7 +15,7 @@ function RouteComponent() {
         <li/>
         <Link to="/course/create">Create a Course</Link>
         <li/>
-        <Link to="/dashboard">Return to dashboard</Link>
+        <Link to="/course">Return to dashboard</Link>
     </div>
   )
 }
