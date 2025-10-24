@@ -36,14 +36,18 @@ function RouteComponent() {
     */
 
   return (
-    <div className='courseGrid'>
-      {data.map((course) => (
-        <div key={course.id}>
-          <Link to="/course/$courseId" params={{courseId: course.id}} className='courseButton'>{course.title}</Link>
-        </div>
-      ))}
+    <div>
+      <div className='courseGrid'>
+        {data.map((course) => (
+          <div key={course.id}>
+            <Link to="/course/$courseId" params={{courseId: course.id}} className='courseButton'>{course.title}</Link>
+          </div>
+        ))}
+      </div>
+      <hr></hr>
+      <h1>Or go to course editor page...</h1>
+      <Link to="/course/edit-nav" className='courseButton'>Edit Navigator</Link>
     </div>
-
   )
   
 }
