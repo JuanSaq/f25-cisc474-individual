@@ -1,4 +1,5 @@
 import { createFileRoute, Link} from '@tanstack/react-router';
+import LoginButton from '../components/LoginButton';
 
 export const Route = createFileRoute('/')({
   component: RouteComponent,
@@ -6,7 +7,10 @@ export const Route = createFileRoute('/')({
 
 function RouteComponent() {
   return (
-  <div>Hello "/"!
+  <div>Hello "/"! 
+    <ul/>
+    Please Login!!!!!
+    <LoginButton/>
     <li/>
     <Link to="/dashboard">To Dashboard (loads courses from backend)</Link>
     <li/>

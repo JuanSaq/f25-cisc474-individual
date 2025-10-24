@@ -3,24 +3,25 @@ import { createFileRoute } from '@tanstack/react-router'
 import { backendFetcher, mutateBackend } from '../../integrations/fetcher';
 import { useState } from 'react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useApiMutation, useCurrentUser } from '../../integrations/api';
 
 export const Route = createFileRoute('/course/delete')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
+   const { data: currentUser } = useCurrentUser();
    const [courseId, setCourseId] = useState('');
 
    const queryClient = useQueryClient();
 
-   const mutation = useMutation({
-    mutationFn: (courseId: string) => {
-      return mutateBackend(`/courses/${courseId}`, 'DELETE');
-    },
-    onSuccess: () => {
-      queryClient.invalidateQueries({queryKey: ["courses"]})
-    },
-   })
+   const mutation = useApiMutation<CourseRef, CourseOut>({
+          endpoint: (variables) => ({
+            path: `/courses/${variables.id}`,
+            method: 'PATCH',
+          }),
+          invalidateKeys: [['courses']],
+       });
 
   return (
     <div>
@@ -48,7 +49,7 @@ function RouteComponent() {
           <div>
             <button
               onClick={() => {
-                mutation.mutate(courseId);
+                mutation.mutate({id: courseId, title: "" });
               }}
             >
               Delete Course
@@ -56,7 +57,7 @@ function RouteComponent() {
           </div>
           <hr></hr>
           <div>
-            <a href="/dashboard">Back to Courses</a>
+            <a href="/course">Back to Courses</a>
           </div>
         </>
       )}

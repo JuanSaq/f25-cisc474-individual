@@ -1,13 +1,39 @@
-import { createFileRoute } from '@tanstack/react-router'
+import { createFileRoute, Link } from '@tanstack/react-router'
+import { useApiQuery, useCurrentUser } from '../../integrations/api';
+import { CourseOut } from '@repo/api/courses';
 
 export const Route = createFileRoute('/course/')({
   component: RouteComponent,
 })
 
 function RouteComponent() {
-  return (
-    <main>
-        <div>Hello "/course/"!</div>
-    </main>
-)
+  const { data: user } = useCurrentUser();
+  
+    const query = useApiQuery<Array<CourseOut>>(['courses'], '/courses');
+    const { data, error, showLoading } = query;
+  
+    if (showLoading) return <span>Is Loading...</span>;
+  
+    if (error) return <span>Error: {error.message}, Welcome {user?.name} (ID: {user?.id}) to the Courses page!
+        </span>
+  
+    if (!data || data.length === 0) {
+      return <div>No courses found.</div>;
+    }
+  
+    return (
+      <div>
+        <div className='courseGrid'>
+          {data.map((course) => (
+            <div key={course.id}>
+              <Link to="/course/$courseId" params={{courseId: course.id}} className='courseButton'>{course.title}</Link>
+            </div>
+          ))}
+        </div>
+        <hr></hr>
+        <h1>Or go to course editor page...</h1>
+        <Link to="/course/edit-nav" className='courseButton'>Edit Navigator</Link>
+      </div>
+    )
+    
 }
