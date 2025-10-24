@@ -3,6 +3,8 @@ import { Course } from '@repo/database';
 import { CoursesService } from './courses.service';
 import { CourseCreateIn, CourseUpdateIn } from '@repo/api/courses';
 import { AuthGuard } from '@nestjs/passport';
+import { CurrentUser } from 'src/authentication/auth/current-user.decorator';
+import { JwtUser } from 'src/authentication/auth/jwt.strategy';
 
 @Controller('courses')
 export class CoursesController {
@@ -16,7 +18,7 @@ export class CoursesController {
 
     @UseGuards(AuthGuard('jwt'))
     @Get()
-    async findAllCourse(): Promise<Course[]> {
+    async findAllCourse(@CurrentUser() user: JwtUser): Promise<Course[]> {
         return this.coursesService.findAllCourses({});
     }
     

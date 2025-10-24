@@ -1,7 +1,5 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import "./dashboard.css"
-import { useQuery } from '@tanstack/react-query';
-import { backendFetcher } from '../integrations/fetcher';
 import type { CourseOut } from '@repo/api/courses'
 import { useApiQuery, useCurrentUser } from '../integrations/api';
 
@@ -19,7 +17,8 @@ function RouteComponent() {
 
   if (showLoading) return <span>Is Loading...</span>;
 
-  if (error) return <span>Error: {error.message}</span>
+  if (error) return <span>Error: {error.message}, Welcome {user?.name} (ID: {user?.id}) to the Courses page!
+      </span>
 
   if (!data || data.length === 0) {
     return <div>No courses found.</div>;
