@@ -9,19 +9,16 @@ export const Route = createFileRoute('/course/delete')({
 })
 
 function RouteComponent() {
-
-
-
    const [courseId, setCourseId] = useState('');
 
    const queryClient = useQueryClient();
 
    const mutation = useMutation({
     mutationFn: (courseId: string) => {
-      return mutateBackend<CourseRef>('/courses', 'DELETE', courseId);
+      return mutateBackend(`/courses/${courseId}`, 'DELETE');
     },
-    onSuccess: (data: CourseRef) => {
-      queryClient.setQueryData(['courses', data.id], {id: data.id, title: 'pl'})
+    onSuccess: () => {
+      queryClient.invalidateQueries({queryKey: ["courses"]})
     },
    })
 
@@ -36,7 +33,7 @@ function RouteComponent() {
             <div>Error deleting course: {mutation.error.message}</div>
           ) : null}
           {mutation.isSuccess ? (
-            <div>Course deleted successfully! ID: {mutation.data.id}</div>
+            <div>Course deleted successfully! ID: {courseId}</div>
           ) : null}
           <hr></hr>
           <div>
