@@ -33,6 +33,7 @@
     "node": ">=18"
   },
   "dependencies": {
+    "@auth0/auth0-react": "^2.8.0",
     "@faker-js/faker": "^9.9.0",
     "@nestjs/jwt": "^11.0.1",
     "@nestjs/passport": "^11.0.5",

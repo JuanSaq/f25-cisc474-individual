@@ -20,7 +20,7 @@ export class UsersController {
     }
 
     @UseGuards(AuthGuard('jwt'))
-    @Get('me')
+    @Get('/me')
     async me(@CurrentUser() auth: JwtUser) {
         console.log(auth);
         if (!auth || !auth.userId) {

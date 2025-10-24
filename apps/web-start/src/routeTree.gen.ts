@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as DashboardRouteImport } from './routes/dashboard'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as CourseIndexRouteImport } from './routes/course/index'
@@ -21,6 +22,11 @@ import { Route as CourseCourseIdGradesRouteImport } from './routes/course/$cours
 import { Route as CourseCourseIdAssignmentsRouteImport } from './routes/course/$courseId/assignments'
 import { Route as CourseCourseIdAnnoucementsRouteImport } from './routes/course/$courseId/annoucements'
 
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const DashboardRoute = DashboardRouteImport.update({
   id: '/dashboard',
   path: '/dashboard',
@@ -82,6 +88,7 @@ const CourseCourseIdAnnoucementsRoute =
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/home': typeof HomeRoute
   '/course/create': typeof CourseCreateRoute
   '/course/delete': typeof CourseDeleteRoute
   '/course/edit': typeof CourseEditRoute
@@ -95,6 +102,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/home': typeof HomeRoute
   '/course/create': typeof CourseCreateRoute
   '/course/delete': typeof CourseDeleteRoute
   '/course/edit': typeof CourseEditRoute
@@ -109,6 +117,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/dashboard': typeof DashboardRoute
+  '/home': typeof HomeRoute
   '/course/create': typeof CourseCreateRoute
   '/course/delete': typeof CourseDeleteRoute
   '/course/edit': typeof CourseEditRoute
@@ -124,6 +133,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/dashboard'
+    | '/home'
     | '/course/create'
     | '/course/delete'
     | '/course/edit'
@@ -137,6 +147,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/dashboard'
+    | '/home'
     | '/course/create'
     | '/course/delete'
     | '/course/edit'
@@ -150,6 +161,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/dashboard'
+    | '/home'
     | '/course/create'
     | '/course/delete'
     | '/course/edit'
@@ -164,6 +176,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   DashboardRoute: typeof DashboardRoute
+  HomeRoute: typeof HomeRoute
   CourseCreateRoute: typeof CourseCreateRoute
   CourseDeleteRoute: typeof CourseDeleteRoute
   CourseEditRoute: typeof CourseEditRoute
@@ -177,6 +190,13 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/dashboard': {
       id: '/dashboard'
       path: '/dashboard'
@@ -260,6 +280,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   DashboardRoute: DashboardRoute,
+  HomeRoute: HomeRoute,
   CourseCreateRoute: CourseCreateRoute,
   CourseDeleteRoute: CourseDeleteRoute,
   CourseEditRoute: CourseEditRoute,

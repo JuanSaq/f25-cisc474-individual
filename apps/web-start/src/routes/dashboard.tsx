@@ -3,6 +3,7 @@ import "./dashboard.css"
 import { useQuery } from '@tanstack/react-query';
 import { backendFetcher } from '../integrations/fetcher';
 import type { CourseOut } from '@repo/api/courses'
+import { useApiQuery, useCurrentUser } from '../integrations/api';
 
 export const Route = createFileRoute('/dashboard')({
   component: RouteComponent,
@@ -11,29 +12,18 @@ export const Route = createFileRoute('/dashboard')({
 
 // temp ids for now, will map later
 function RouteComponent() {
-  const { isPending, isError, data, error } = useQuery({
-    queryKey: ['courses'],
-    queryFn: backendFetcher<Array<CourseOut>>("/courses"),
-  })
+  const { data: user } = useCurrentUser();
 
-  if (isPending) return <span>Is Loading...</span>;
+  const query = useApiQuery<Array<CourseOut>>(['courses'], '/courses');
+  const { data, error, showLoading } = query;
 
-  if (isError) return <span>Error: {error.message}</span>
+  if (showLoading) return <span>Is Loading...</span>;
 
-  /*
-  return (
-      <main>
-        <h1>Hello "/dashboard"!</h1>
-        <div className="courseGrid">
-            <Link to="/course/$courseId" params={{courseId: "1"}} className="courseButton"> test</Link>
-            <Link to="/course/$courseId" params={{courseId: "2"}} className="courseButton"> test</Link>
-            <Link to="/course/$courseId" params={{courseId: "3"}} className="courseButton"> test</Link>
-            <Link to="/course/$courseId" params={{courseId: "4"}} className="courseButton"> test</Link>
+  if (error) return <span>Error: {error.message}</span>
 
-        </div>
-    </main>
-  )
-    */
+  if (!data || data.length === 0) {
+    return <div>No courses found.</div>;
+  }
 
   return (
     <div>
