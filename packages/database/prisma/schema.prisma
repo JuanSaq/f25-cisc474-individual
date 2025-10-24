@@ -11,11 +11,13 @@ datasource db {
 
 model User {
   id          String       @id @default(uuid())
-  email       String       @unique
+  email       String?       @unique
   name        String?
   courses     Course[]
   profile     Profile?
   submissions Submission[]
+
+  authentications Authentication[]
 }
 
 model Profile {
@@ -57,4 +59,12 @@ model Submission {
   ownerId      String
   assignment   Assignment @relation(fields: [assignmentId], references: [id])
   owner        User       @relation(fields: [ownerId], references: [id])
+}
+
+model Authentication {
+  id         String @id @default(uuid())
+  user       User   @relation(fields: [userId], references: [id])
+  userId     String
+  provider   String
+  providerId String
 }
