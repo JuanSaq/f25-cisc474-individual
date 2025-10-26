@@ -52,7 +52,7 @@ function RouteComponent() {
               onClick={() => {
                 mutation.mutate({
                   title: newTitle,
-                  ownerId: currentUser?.id || '',
+                  ownerId: currentUser?.id || '1b52ea2a-fe7e-4ab6-8a7b-afaa3d99c0f3',
                 });
               }}
             >

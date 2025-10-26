@@ -15,10 +15,10 @@ function RouteComponent() {
   const query = useApiQuery<Array<CourseOut>>(['courses'], '/courses');
   const { data, error, showLoading } = query;
 
-  if (showLoading) return <span>Is Loading...</span>;
-
   if (error) return <span>Error: {error.message}, Welcome {user?.name} (ID: {user?.id}) to the Courses page!
       </span>
+  if (showLoading) return <span>Is Loading...</span>;
+
 
   if (!data || data.length === 0) {
     return <div>No courses found.</div>;
