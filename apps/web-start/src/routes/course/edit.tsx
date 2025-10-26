@@ -63,7 +63,7 @@ function RouteComponent() {
               onClick={() => {
                 mutation.mutate({
                   id: courseId,
-                  title: newTitle,
+                  title: newTitle || '',
                   ownerId: currentUser?.id || '',
                 });
               }}

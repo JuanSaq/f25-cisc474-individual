@@ -49,7 +49,7 @@ function RouteComponent() {
           <div>
             <button
               onClick={() => {
-                mutation.mutate({id: courseId, title: "" });
+                mutation.mutate({id: courseId, title: "test" });
               }}
             >
               Delete Course
