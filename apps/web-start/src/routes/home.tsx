@@ -1,5 +1,6 @@
 import { useAuth0 } from '@auth0/auth0-react';
 import { createFileRoute, Link } from '@tanstack/react-router'
+import { useCurrentUser } from '../integrations/api';
 
 export const Route = createFileRoute('/home')({
   component: RouteComponent,
@@ -7,6 +8,10 @@ export const Route = createFileRoute('/home')({
 
 function RouteComponent() {
   const { user, isAuthenticated, isLoading } = useAuth0();
+
+    const { data: user2 } = useCurrentUser();
+    console.log(user2?.id);
+  
 
   if (isLoading) {
     return <div>Loading ...</div>;

@@ -9,20 +9,10 @@ import { JwtUser } from 'src/authentication/auth/jwt.strategy';
 export class UsersController {
     constructor(private readonly usersService: UsersService) {}
 
-    @Get("/:id")
-    async findUser(@Param('id') id: string) {
-        return this.usersService.findUser(id)
-    }
-
-    @Get()
-    async findAllUser(): Promise<User[]> {
-        return this.usersService.findAllUsers({});
-    }
 
     @UseGuards(AuthGuard('jwt'))
     @Get('/me')
     async me(@CurrentUser() auth: JwtUser) {
-        console.log(auth);
         if (!auth || !auth.userId) {
         throw new UnauthorizedException();
         }
@@ -37,5 +27,18 @@ export class UsersController {
         email: user.email,
         };
   }
+
+    @Get("/:id")
+    async findUser(@Param('id') id: string) {
+        console.log("got the user ok ok");
+        console.log(id);
+        return this.usersService.findUser(id)
+    }
+
+    @Get()
+    async findAllUser() {
+        return this.usersService.findAllUsers();
+    }
+
     
 }

@@ -1,6 +1,7 @@
 import { createFileRoute, Link } from '@tanstack/react-router'
 import { useApiQuery, useCurrentUser } from '../../integrations/api';
 import { CourseOut } from '@repo/api/courses';
+import LogoutButton from '../../components/LogoutButton';
 
 export const Route = createFileRoute('/course/')({
   component: RouteComponent,
@@ -8,11 +9,14 @@ export const Route = createFileRoute('/course/')({
 
 function RouteComponent() {
   const { data: user } = useCurrentUser();
+  console.log(user?.id);
   
     const query = useApiQuery<Array<CourseOut>>(['courses'], '/courses');
-    const { data, error, showLoading } = query;
+    const { data, error, showLoading, isEnabled } = query;
   
     if (error) return <span>Error: {error.message} </span>;
+
+   // if (!isEnabled) return <span>Not Authenitaced!</span>
 
     if (showLoading) return <span>Is Loading...</span>;
   
@@ -34,6 +38,7 @@ function RouteComponent() {
         <hr></hr>
         <h1>Or go to course editor page...</h1>
         <Link to="/course/edit-nav" className='courseButton'>Edit Navigator</Link>
+        <LogoutButton/>
       </div>
     )
     
