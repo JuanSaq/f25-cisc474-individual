@@ -25,7 +25,7 @@ model Profile {
   bio      String
   pronouns String
   userId   String @unique
-  user     User   @relation(fields: [userId], references: [id])
+  user     User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Course {
@@ -35,7 +35,7 @@ model Course {
   title       String
   ownerId     String
   assignments Assignment[]
-  owner       User         @relation(fields: [ownerId], references: [id])
+  owner       User         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
 
 model Assignment {
@@ -46,7 +46,7 @@ model Assignment {
   title       String
   description String?
   courseId    String
-  course      Course       @relation(fields: [courseId], references: [id])
+  course      Course       @relation(fields: [courseId], references: [id], onDelete: Cascade)
   submissions Submission[]
 }
 
@@ -57,13 +57,13 @@ model Submission {
   submittedAt  DateTime?
   assignmentId String
   ownerId      String
-  assignment   Assignment @relation(fields: [assignmentId], references: [id])
-  owner        User       @relation(fields: [ownerId], references: [id])
+  assignment   Assignment @relation(fields: [assignmentId], references: [id], onDelete: Cascade)
+  owner        User       @relation(fields: [ownerId], references: [id], onDelete: Cascade)
 }
 
 model Authentication {
   id         String @id @default(uuid())
-  user       User   @relation(fields: [userId], references: [id])
+  user       User   @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId     String
   provider   String
   providerId String

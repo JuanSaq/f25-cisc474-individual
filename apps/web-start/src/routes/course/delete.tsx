@@ -18,7 +18,7 @@ function RouteComponent() {
    const mutation = useApiMutation<CourseRef, CourseOut>({
           endpoint: (variables) => ({
             path: `/courses/${variables.id}`,
-            method: 'PATCH',
+            method: 'DELETE',
           }),
           invalidateKeys: [['courses']],
        });
